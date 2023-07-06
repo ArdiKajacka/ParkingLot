@@ -1,0 +1,89 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ParkingLot.DataStore;
+using ParkingLot.Entities;
+using ParkingLot.Repositories;
+
+namespace ParkingLot.Controllers
+{
+	[ApiController]
+	[Route("api/ParkingSpots")]
+	public class ParkingSpotsController : ControllerBase
+	{
+		private readonly ParkingSpotRepository _parkingSpotRepository;
+
+		public ParkingSpotsController(ParkingSpotRepository parkingSpotRepository)
+		{
+			_parkingSpotRepository = parkingSpotRepository;
+		}
+
+		[HttpGet("Reserved")]
+		public IActionResult GetReservedSpots()
+		{
+			int activeSubscriberCount = _parkingSpotRepository.GetReservedSpots();
+
+			var reservedSpots = new ReservedSpotsDTO
+			{
+				subscriberSpots = activeSubscriberCount
+			};
+
+			return Ok(reservedSpots);
+		}
+
+		[HttpGet("Total")]
+		public IActionResult GetParkingSpots()
+		{
+			int totalSpots = _parkingSpotRepository.GetTotalSpots();
+
+			var parkingSpots = new ParkingSpotsDTO
+			{
+				TotalSpots = totalSpots
+			};
+
+			return Ok(parkingSpots);
+		}
+
+		[HttpGet("Free")]
+		public IActionResult GetFreeSpots()
+		{
+			int freeSpots = _parkingSpotRepository.GetFreeSpots();
+
+			var freeSpotsDto = new FreeSpotsDTO
+			{
+				FreeSpots = freeSpots
+			};
+
+			return Ok(freeSpotsDto);
+		}
+
+		[HttpPut("{Id}")]
+		public IActionResult UpdateParkingSpot(int Id,  ParkingSpotsDTO updatedParkingSpot)
+		{
+			var parkingSpot = new ParkingSpots
+			{
+				Id = Id,
+				TotalSpots = updatedParkingSpot.TotalSpots
+			};
+
+			_parkingSpotRepository.UpdateParkingSpot(parkingSpot);
+
+			return Ok();
+		}
+
+
+	}
+
+	public class ParkingSpotsDTO
+	{
+		public int TotalSpots { get; set; }
+	}
+
+	public class ReservedSpotsDTO
+	{
+		public int subscriberSpots { get; set; }
+	}
+
+	public class FreeSpotsDTO
+	{
+		public int FreeSpots { get; set; }
+	}
+}
