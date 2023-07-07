@@ -15,6 +15,7 @@ namespace ParkingLot.Repositories
 			_subscriberData = SubscriberData.Current;
 			_parkingSpotsData = ParkingSpotsData.Current;
 		}
+		//metoda per te updetuar ParkingSpots
 		public void UpdateParkingSpot(ParkingSpots updatedParkingSpot)
 		{
 			var existingParkingSpot = _parkingSpotsData.AllParkingSpots.FirstOrDefault(p => p.Id == updatedParkingSpot.Id);
@@ -29,7 +30,7 @@ namespace ParkingLot.Repositories
 
 		public int GetReservedSpots()
 		{
-			var activeSubscriberCount = _subscriberData.AllSubscribers.Count(subscriber => !subscriber.IsDeleted);
+			var activeSubscriberCount = _subscriberData.AllSubscribers.Count(subscriber => !subscriber.isDeleted);
 			return activeSubscriberCount;
 		}
 

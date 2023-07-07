@@ -1,5 +1,6 @@
 ﻿using ParkingLot.DbContexts;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParkingLot.Entities
 {
@@ -21,7 +22,8 @@ namespace ParkingLot.Entities
 		[Required]
 		public int PlateNumber { get; set; }
 		[Required]
-		public bool IsDeleted { get; set; } = false;
+
+		public bool isDeleted { get; set; } = false;
 
 	}
 }

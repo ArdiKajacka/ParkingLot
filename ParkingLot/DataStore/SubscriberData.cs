@@ -19,17 +19,17 @@ namespace ParkingLot.DataStore
 					Email = "vv",
 					Phone = 0695819901,
 					PlateNumber = 1,
-					IsDeleted = false,
+					isDeleted = false,
 				},
 				new Subscriber()
 				{
 					FirstName = "Endri",
 					LastName = "Hoxha",
-					IdCard = 3,
+					IdCard = 5,
 					Email = "vv",
 					Phone = 066558885,
 					PlateNumber = 1,
-					IsDeleted = false,
+					isDeleted = false,
 				},
 
 			};

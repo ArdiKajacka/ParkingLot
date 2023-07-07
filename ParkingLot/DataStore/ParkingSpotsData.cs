@@ -14,7 +14,7 @@ namespace ParkingLot.DataStore
 			new ParkingSpots()
 			{
 				Id = 1,
-				TotalSpots = 24,
+				TotalSpots = 23,
 
 			},
 		};

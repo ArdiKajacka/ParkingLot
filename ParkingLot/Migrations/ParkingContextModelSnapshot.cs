@@ -85,7 +85,7 @@ namespace ParkingLot.Migrations
                     b.Property<int>("MinimumHours")
                         .HasColumnType("integer");
 
-                    b.Property<int>("String")
+                    b.Property<int>("Type")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -109,9 +109,6 @@ namespace ParkingLot.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -121,6 +118,9 @@ namespace ParkingLot.Migrations
 
                     b.Property<int>("PlateNumber")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("boolean");
 
                     b.HasKey("IdCard");
 

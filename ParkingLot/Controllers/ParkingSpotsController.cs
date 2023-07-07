@@ -15,7 +15,7 @@ namespace ParkingLot.Controllers
 		{
 			_parkingSpotRepository = parkingSpotRepository;
 		}
-
+		// request qe kthen numrin e subsciberave ose vendet e rezervuara
 		[HttpGet("Reserved")]
 		public IActionResult GetReservedSpots()
 		{
@@ -41,7 +41,7 @@ namespace ParkingLot.Controllers
 
 			return Ok(parkingSpots);
 		}
-
+		//request qe kthen vendet e lira = total - reserved
 		[HttpGet("Free")]
 		public IActionResult GetFreeSpots()
 		{
@@ -54,6 +54,7 @@ namespace ParkingLot.Controllers
 
 			return Ok(freeSpotsDto);
 		}
+		//Rrequest qe BEN update ParkingSpot qe merr si parameter ID
 
 		[HttpPut("{Id}")]
 		public IActionResult UpdateParkingSpot(int Id,  ParkingSpotsDTO updatedParkingSpot)

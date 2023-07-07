@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ParkingLot.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using ParkingLot.Repositories;
+using ParkingLot.DataStore;
 
 namespace ParkingLot
 {
@@ -26,8 +27,16 @@ namespace ParkingLot
 			builder.Services.AddDbContext<ParkingContext>(options =>
 				options.UseNpgsql(configuration.GetConnectionString("ParkingDbConnection")));
 
-			// Add the ParkingSpotRepository to the services
+
+			builder.Services.AddSingleton<ParkingSpotsData>();
+			builder.Services.AddSingleton<PricingPlansData>();
+			builder.Services.AddSingleton<SubscriberData>();
+
+			
 			builder.Services.AddScoped<ParkingSpotRepository>();
+			builder.Services.AddScoped<PricingPlansRepository>();
+			builder.Services.AddScoped<SubscriberRepository>();
+
 
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();

@@ -17,7 +17,7 @@ namespace ParkingLot.DataStore
 					HourlyPricing = 2,
 					DailyPricing = 3,
 					MinimumHours = 1,
-					Type = "Weekday"
+					Type = PricingPlanType.Weekday
 				},
 				new PricingPlans()
 				{
@@ -25,7 +25,7 @@ namespace ParkingLot.DataStore
 					HourlyPricing = 4,
 					DailyPricing = 10,
 					MinimumHours = 3,
-					Type = "Weekend"
+					Type = PricingPlanType.Weekend
 				},
 				
 
