@@ -36,6 +36,7 @@ namespace ParkingLot
 			builder.Services.AddScoped<ParkingSpotRepository>();
 			builder.Services.AddScoped<PricingPlansRepository>();
 			builder.Services.AddScoped<SubscriberRepository>();
+			builder.Services.AddScoped<SubscriptionsRepository>();
 
 
 			builder.Services.AddEndpointsApiExplorer();

@@ -12,4 +12,5 @@
 		public DateTime EndTime { get; set; }
 		public bool isDeleted { get; set; } = false;
 	}
+
 }

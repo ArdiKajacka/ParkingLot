@@ -39,6 +39,8 @@ namespace ParkingLot.Repositories
 		//}
 
 
+
+		//metoda per te update subscibers
 		public void UpdateSubscriber(Subscriber updatedSubscriber)
 		{
 			var existingSubscriber = _context.Subscriber.FirstOrDefault(subscriber => subscriber.IdCard == updatedSubscriber.IdCard);
@@ -48,7 +50,7 @@ namespace ParkingLot.Repositories
 				throw new Exception("Subscriber not found.");
 			}
 
-			// Update the properties of the existing subscriber
+			// Update  properties e nje subscriberi ekzistues
 			existingSubscriber.FirstName = updatedSubscriber.FirstName;
 			existingSubscriber.LastName = updatedSubscriber.LastName;
 			existingSubscriber.Email = updatedSubscriber.Email;
@@ -63,7 +65,7 @@ namespace ParkingLot.Repositories
 		{
 			return _context.Subscriber.FirstOrDefault(subscriber => subscriber.IdCard == idCard);
 		}
-
+		//metoda qe kthen isdeleted ne true nese ekziston idcard
 		public void SoftDeleteSubscriber(int idCard)
 		{
 			var subscriber = _context.Subscriber.FirstOrDefault(sub => sub.IdCard == idCard);

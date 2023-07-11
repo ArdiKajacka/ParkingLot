@@ -22,7 +22,6 @@ namespace ParkingLot.Entities
 		[Required]
 		public int PlateNumber { get; set; }
 		[Required]
-
 		public bool isDeleted { get; set; } = false;
 
 	}
