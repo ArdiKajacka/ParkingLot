@@ -1,4 +1,4 @@
-﻿// SubscriberRepository.cs
+﻿
 
 using System.Linq;
 using ParkingLot.DbContexts;

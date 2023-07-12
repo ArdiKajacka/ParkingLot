@@ -18,6 +18,7 @@ namespace ParkingLot.DataStore
 					Code = 1,
 					CheckIn = DateTime.Now,
 					CheckOut = DateTime.Now.AddHours(7),
+					IsDeleted = false,
 				},
 			};
 		}

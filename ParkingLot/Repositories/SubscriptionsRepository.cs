@@ -1,4 +1,4 @@
-﻿// SubscriptionsRepository.cs
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +46,9 @@ namespace ParkingLot.Repositories
 		{
 			return SubscriptionData.Current.AllSubscriptions
 				.Where(sub => sub.Subscriber != null &&
-							   (sub.Subscriber.FirstName.Contains(subscriberName, StringComparison.OrdinalIgnoreCase) ||
-								sub.Subscriber.LastName.Contains(subscriberName, StringComparison.OrdinalIgnoreCase)))
+							   (sub.Subscriber.FirstName == subscriberName ||
+							   sub.Subscriber.Email == subscriberName ||
+								sub.Subscriber.LastName == subscriberName))
 				.Select(sub => new Subscriptions
 				{
 					Id = sub.Id,
@@ -75,7 +76,7 @@ namespace ParkingLot.Repositories
 				throw new ArgumentException("Subscription not found.");
 			}
 
-			// Update the existing subscription with the new values
+			// Update vlerat e reja
 			existingSubscription.StartTime = subscription.StartTime;
 			existingSubscription.EndTime = subscription.EndTime;
 			existingSubscription.Price = subscription.Price;
@@ -90,7 +91,6 @@ namespace ParkingLot.Repositories
 				throw new ArgumentException("Subscription not found.");
 			}
 
-			// Perform soft deletion by marking the subscription as deleted
 			subscription.isDeleted = true;
 		}
 

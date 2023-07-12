@@ -54,8 +54,8 @@ public class SubscriptionsController : ControllerBase
         }
     }
 
-    // GET api/subscriptions/search/{subscriberName}
-    [HttpGet("search/{subscriberName}")]
+	// GET api/subscriptions{subscriberFirstName/subscriberLastName/subscriberEmail}
+	[HttpGet("search/fname/lname/email{subscriberName}")]
     public IActionResult GetSubscriptionsBySubscriberName(string subscriberName)
     {
         try

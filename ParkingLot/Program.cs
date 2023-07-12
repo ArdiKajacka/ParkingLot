@@ -31,12 +31,15 @@ namespace ParkingLot
 			builder.Services.AddSingleton<ParkingSpotsData>();
 			builder.Services.AddSingleton<PricingPlansData>();
 			builder.Services.AddSingleton<SubscriberData>();
-
+			builder.Services.AddSingleton<LogsData>();
 			
+
+
 			builder.Services.AddScoped<ParkingSpotRepository>();
 			builder.Services.AddScoped<PricingPlansRepository>();
 			builder.Services.AddScoped<SubscriberRepository>();
 			builder.Services.AddScoped<SubscriptionsRepository>();
+			builder.Services.AddScoped<LogsRepository>();
 
 
 			builder.Services.AddEndpointsApiExplorer();
