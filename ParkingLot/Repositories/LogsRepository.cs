@@ -18,30 +18,32 @@ namespace ParkingLot.Repositories
 		{
 			PricingPlans pricingPlan = PricingPlansData.Current.AllPricingPlans.FirstOrDefault(plan => plan.Type == GetPricingPlanType(logs.CheckIn));
 
-			// Check if subscription Id is present
+			// Kontrollon nese subscription Id eshte prezente
 			if (logs.SubscriptionId > 0)
 			{
-				logs.Price = 0; // Price is 0 for subscription holders
+				logs.Price = 0; 
 			}
 			else
-			{
+			{//mat kohen qe makina ka qendruar ne parkim
 				TimeSpan duration = logs.CheckOut - logs.CheckIn;
 				decimal totalHours = (decimal)duration.TotalHours;
 
+				//nese nuk e ka kaluar minimumin per te paguar sa per 1 dite 
 				if (totalHours <= pricingPlan.MinimumHours)
 				{
 					logs.Price = totalHours * pricingPlan.HourlyPricing;
 				}
 				else
-				{
+				{//gjen sa dite ka qendruar dhe sa ore pervec diteve
 					int totalDays = (int)Math.Floor(totalHours / 24);
 					decimal remainingHours = totalHours % 24;
-
+					//kontrollon nese remaining hours qe ngelen nuk e ka kaluar minimum hours  dhe e shton ne cmim per ore
 					if (remainingHours <= pricingPlan.MinimumHours)
 					{
 						logs.Price = (totalDays * pricingPlan.DailyPricing) + (remainingHours * pricingPlan.HourlyPricing);
 					}
 					else
+					//nese remaining hours e ka kaluar minimum hours e shton si dite
 					{
 						logs.Price = ((totalDays + 1) * pricingPlan.DailyPricing);
 					}
