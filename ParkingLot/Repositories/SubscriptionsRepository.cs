@@ -62,6 +62,37 @@ namespace ParkingLot.Repositories
 				});
 		}
 
+		public void Update(Subscriptions subscription)
+		{
+			if (subscription == null)
+			{
+				throw new ArgumentException("Subscription object cannot be null.");
+			}
+
+			var existingSubscription = SubscriptionData.Current.AllSubscriptions.FirstOrDefault(sub => sub.Code == subscription.Code);
+			if (existingSubscription == null)
+			{
+				throw new ArgumentException("Subscription not found.");
+			}
+
+			// Update the existing subscription with the new values
+			existingSubscription.StartTime = subscription.StartTime;
+			existingSubscription.EndTime = subscription.EndTime;
+			existingSubscription.Price = subscription.Price;
+			existingSubscription.DiscountValue = subscription.DiscountValue;
+		}
+
+		public void SoftDelete(int code)
+		{
+			var subscription = SubscriptionData.Current.AllSubscriptions.FirstOrDefault(sub => sub.Code == code);
+			if (subscription == null)
+			{
+				throw new ArgumentException("Subscription not found.");
+			}
+
+			// Perform soft deletion by marking the subscription as deleted
+			subscription.isDeleted = true;
+		}
 
 	}
 }

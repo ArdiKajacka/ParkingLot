@@ -68,4 +68,41 @@ public class SubscriptionsController : ControllerBase
             return StatusCode(500, $"Failed to retrieve subscriptions: {ex.Message}");
         }
     }
+
+    [HttpPut]
+    public IActionResult UpdateSubscription(Subscriptions subscription)
+    {
+        try
+        {
+            _subscriptionsRepository.Update(subscription);
+            return Ok("Subscription updated successfully.");
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Failed to update subscription: {ex.Message}");
+        }
+    }
+
+    // DELETE api/subscriptions/{code}
+    [HttpDelete("{code}")]
+    public IActionResult SoftDeleteSubscription(int code)
+    {
+        try
+        {
+            _subscriptionsRepository.SoftDelete(code);
+            return Ok("Subscription deleted successfully.");
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Failed to delete subscription: {ex.Message}");
+        }
+    }
 }
