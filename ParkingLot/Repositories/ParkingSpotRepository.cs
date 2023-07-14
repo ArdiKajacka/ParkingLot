@@ -1,6 +1,6 @@
-﻿using ParkingLot.DataStore;
+﻿using System.Linq;
+using ParkingLot.DataStore;
 using ParkingLot.Entities;
-using System.Linq;
 
 namespace ParkingLot.Repositories
 {
@@ -8,14 +8,17 @@ namespace ParkingLot.Repositories
 	{
 		private readonly ParkingSpotsData _parkingSpotsData;
 		private readonly SubscriberData _subscriberData;
-
+		private readonly LogsData _logsData;
 
 		public ParkingSpotRepository()
 		{
 			_subscriberData = SubscriberData.Current;
 			_parkingSpotsData = ParkingSpotsData.Current;
+			_logsData = LogsData.Current;
 		}
-		//metoda per te updetuar ParkingSpots
+
+
+
 		public void UpdateParkingSpot(ParkingSpots updatedParkingSpot)
 		{
 			var existingParkingSpot = _parkingSpotsData.AllParkingSpots.FirstOrDefault(p => p.Id == updatedParkingSpot.Id);
@@ -23,23 +26,12 @@ namespace ParkingLot.Repositories
 			{
 				existingParkingSpot.TotalSpots = updatedParkingSpot.TotalSpots;
 			}
-			
-				
 		}
-
-
 		public int GetReservedSpots()
 		{
 			var activeSubscriberCount = _subscriberData.AllSubscribers.Count(subscriber => !subscriber.isDeleted);
 			return activeSubscriberCount;
 		}
-
-		public int GetTotalSpots()
-		{
-			var totalSpots = ParkingSpotsData.Current.AllParkingSpots.Sum(p => p.TotalSpots);
-			return totalSpots;
-		}
-
 		public int GetFreeSpots()
 		{
 			int totalSpots = GetTotalSpots();
@@ -47,7 +39,21 @@ namespace ParkingLot.Repositories
 			int freeSpots = totalSpots - reservedSpots;
 			return freeSpots;
 		}
+		public int GetTotalSpots()
+		{
+			var totalSpots = _parkingSpotsData.AllParkingSpots.Sum(p => p.TotalSpots);
+			return totalSpots;
+		}
+		public int GetOccupiedRegularSpots()
+		{
+			var checkedInRegularSpots = _logsData.AllLogs.Count(log => log.CheckIn != null && log.CheckOut == null && log.SubscriptionId == null);
+			return checkedInRegularSpots;
+		}
 
-
+		public int GetOccupiedReservedSpots()
+		{
+			var checkedInReservedSpots = _logsData.AllLogs.Count(log => log.CheckIn != null && log.CheckOut == null && log.SubscriptionId != null);
+			return checkedInReservedSpots;
+		}
 	}
 }

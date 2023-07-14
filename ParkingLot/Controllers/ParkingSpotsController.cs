@@ -70,7 +70,41 @@ namespace ParkingLot.Controllers
 			return Ok();
 		}
 
+		[HttpGet("Occupied/Reserved")]
+		public IActionResult GetOccupiedReservedSpots()
+		{
+			int occupiedReservedSpots = _parkingSpotRepository.GetOccupiedReservedSpots();
 
+			var response = new OccupiedReserverdSpotsDTO
+			{
+				OccupiedReservedSpots = occupiedReservedSpots
+			};
+
+			return Ok(response);
+		}
+
+		[HttpGet("Occupied/Regular")]
+		public IActionResult GetOccupiedRegularSpots()
+		{
+			int occupiedRegularSpots = _parkingSpotRepository.GetOccupiedRegularSpots();
+
+			var response = new OccupiedRegularSpotsDTO
+			{
+				OccupiedRegularSpots = occupiedRegularSpots
+			};
+
+			return Ok(response);
+		}
+	}
+
+}
+	public class OccupiedReserverdSpotsDTO
+	{
+	public int OccupiedReservedSpots { get; set; }
+	}
+	public class OccupiedRegularSpotsDTO
+	{
+		public int OccupiedRegularSpots { get; set; }
 	}
 
 	public class ParkingSpotsDTO
@@ -87,4 +121,4 @@ namespace ParkingLot.Controllers
 	{
 		public int FreeSpots { get; set; }
 	}
-}
+
