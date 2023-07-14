@@ -48,8 +48,8 @@ namespace ParkingLot.Controllers
 			}
 		}
 
-		// GET api/Logs/Search/{searchQuery}
-		[HttpGet("Search/{searchQuery}")]
+		// GET api/Logs/FirstName/LastName/Code
+		[HttpGet("SubFname,Lname,Code/{searchQuery}")]
 		public IActionResult SearchLogs(string searchQuery)
 		{
 			try

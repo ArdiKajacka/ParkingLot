@@ -1,4 +1,5 @@
-﻿using ParkingLot.DataStore;
+﻿using Microsoft.EntityFrameworkCore;
+using ParkingLot.DataStore;
 using ParkingLot.DbContexts;
 using ParkingLot.Entities;
 
@@ -16,36 +17,46 @@ namespace ParkingLot.Repositories
 
 		public void CreateLogs(Logs logs)
 		{
-			PricingPlans pricingPlan = PricingPlansData.Current.AllPricingPlans.FirstOrDefault(plan => plan.Type == GetPricingPlanType(logs.CheckIn));
+			TimeSpan duration = logs.CheckOut - logs.CheckIn;
 
-			// Kontrollon nese subscription Id eshte prezente
-			if (logs.SubscriptionId > 0)
+			// Check if the duration is less than 15 minutes
+			if (duration.TotalMinutes < 15)
 			{
-				logs.Price = 0; 
+				logs.Price = 0;
 			}
 			else
-			{//mat kohen qe makina ka qendruar ne parkim
-				TimeSpan duration = logs.CheckOut - logs.CheckIn;
-				decimal totalHours = (decimal)duration.TotalHours;
+			{
+				PricingPlans pricingPlan = PricingPlansData.Current.AllPricingPlans.FirstOrDefault(plan => plan.Type == GetPricingPlanType(logs.CheckIn));
 
-				//nese nuk e ka kaluar minimumin per te paguar sa per 1 dite 
-				if (totalHours <= pricingPlan.MinimumHours)
+				// Kontrollon nese subscription Id eshte prezente
+				if (logs.SubscriptionId > 0)
 				{
-					logs.Price = totalHours * pricingPlan.HourlyPricing;
+					logs.Price = 0;
 				}
 				else
-				{//gjen sa dite ka qendruar dhe sa ore pervec diteve
-					int totalDays = (int)Math.Floor(totalHours / 24);
-					decimal remainingHours = totalHours % 24;
-					//kontrollon nese remaining hours qe ngelen nuk e ka kaluar minimum hours  dhe e shton ne cmim per ore
-					if (remainingHours <= pricingPlan.MinimumHours)
+				{
+					decimal totalHours = (decimal)duration.TotalHours;
+
+					//nese nuk e ka kaluar minimumin per te paguar sa per 1 dite 
+					if (totalHours <= pricingPlan.MinimumHours)
 					{
-						logs.Price = (totalDays * pricingPlan.DailyPricing) + (remainingHours * pricingPlan.HourlyPricing);
+						logs.Price = totalHours * pricingPlan.HourlyPricing;
 					}
 					else
-					//nese remaining hours e ka kaluar minimum hours e shton si dite
 					{
-						logs.Price = ((totalDays + 1) * pricingPlan.DailyPricing);
+						int totalDays = (int)Math.Floor(totalHours / 24);
+						decimal remainingHours = totalHours % 24;
+
+						//kontrollon nese remaining hours qe ngelen nuk e ka kaluar minimum hours dhe e shton ne cmim per ore
+						if (remainingHours <= pricingPlan.MinimumHours)
+						{
+							logs.Price = (totalDays * pricingPlan.DailyPricing) + (remainingHours * pricingPlan.HourlyPricing);
+						}
+						else
+						{
+							//nese remaining hours e ka kaluar minimum hours e shton si dite
+							logs.Price = ((totalDays + 1) * pricingPlan.DailyPricing);
+						}
 					}
 				}
 			}
@@ -53,6 +64,7 @@ namespace ParkingLot.Repositories
 			_context.Logs.Add(logs);
 			_context.SaveChanges();
 		}
+
 
 		private PricingPlanType GetPricingPlanType(DateTime date)
 		{
@@ -69,7 +81,7 @@ namespace ParkingLot.Repositories
 		{
 			return _context.Logs.Where(logs => logs.CheckIn.Date == date.Date);
 		}
-
+		// kerko nga emri ose mbiemri i subscriberit ose nga kodi
 		public IEnumerable<Logs> SearchLogs(string searchQuery)
 		{
 			return _context.Logs
@@ -104,9 +116,11 @@ namespace ParkingLot.Repositories
 			if (logs != null)
 			{
 				logs.IsDeleted = true;
+				_context.Entry(logs).State = EntityState.Modified; // Mark the entity as modified
 				_context.SaveChanges();
 			}
 		}
+
 
 	}
 }
