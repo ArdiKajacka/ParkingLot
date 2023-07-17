@@ -69,7 +69,7 @@ function updateSpotsLeft(freeSpots) {
     const h2Element = document.getElementById('freeSpots-header');
     const freeProgressBar = document.getElementById("firstProgress");
     const widthPercentage = `${freeSpots}%`;
-    freeProgressBar.textContent = widthPercentage;
+    freeProgressBar.textContent = freeSpots;
     freeProgressBar.style.width = widthPercentage;
     if (freeSpots <= 10) {
         freeProgressBar.style.backgroundColor = 'red'; // Set background color to red when freeSpots is 10 or less
@@ -85,6 +85,6 @@ function updateSpotsLeft(freeSpots) {
 function updateBusySpots(busySpots) {
     const busyProgressBar = document.getElementById("secondProgress");
     const widthPercentage = `${busySpots}%`;
-    busyProgressBar.textContent = widthPercentage;
+    busyProgressBar.textContent = busySpots;
     busyProgressBar.style.width = widthPercentage;
 }

@@ -41,9 +41,9 @@
       <section id="LogIn">
         <div class="card">
             <h2>Subscribe</h2>
-            <form>
+            <form id="myForm">
               <div class="input-group">
-                <label for="firstName">First Name:</label>
+                <label id="" for="firstName">First Name:</label>
                 <input type="text" id="firstName" name="firstName" required>
               </div>
               <div class="input-group">
@@ -52,15 +52,15 @@
               </div>
               <div class="input-group">
                 <label for="cardNumber">Card Number:</label>
-                <input type="text" id="cardNumber" name="cardNumber" required>
+                <input placeholder="9 numbers format eg. 123456789" type="text" id="cardNumber" name="cardNumber" required>
               </div>
               <div class="input-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" placeholder="eg. eva1932@gmail.com" id="email" name="email" required>
               </div>
               <div class="input-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" placeholder="9 numbers phone number" id="phone" name="phone" required>
               </div>
               <div class="input-group">
                 <label for="birthday">Birthday:</label>
@@ -68,14 +68,127 @@
               </div>
               <div class="input-group">
                 <label for="plateNumber">Plate Number:</label>
-                <input type="text" id="plateNumber" name="plateNumber" required>
+                <input type="text" id="plateNumber" placeholder="eg. 1234" name="plateNumber" required>
               </div>
               <div class="input-group">
                 <input id="submit-button" type="submit" value="Subscribe">
               </div>
             </form>
           </div>
-
+          <script>
+const existingJsonString = `{
+    "subscriber": [
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "idCard": 123456789,
+        "email": "johndoe@example.com",
+        "phone": 987654321,
+        "plateNumber": 1234,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "idCard": 987654321,
+        "email": "janesmith@example.com",
+        "phone": 123456789,
+        "plateNumber": 5678,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Alice",
+        "lastName": "Johnson",
+        "idCard": 111111111,
+        "email": "alicejohnson@example.com",
+        "phone": 222222222,
+        "plateNumber": 9102,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Bob",
+        "lastName": "Smithson",
+        "idCard": 333333333,
+        "email": "bobsmithson@example.com",
+        "phone": 444444444,
+        "plateNumber": 2468,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Emily",
+        "lastName": "Brown",
+        "idCard": 555555555,
+        "email": "emilybrown@example.com",
+        "phone": 666666666,
+        "plateNumber": 1357,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Michael",
+        "lastName": "Davis",
+        "idCard": 777777777,
+        "email": "michaeldavis@example.com",
+        "phone": 888888888,
+        "plateNumber": 7890,
+        "isDeleted": false
+      },
+      {
+        "firstName": "Sophia",
+        "lastName": "Wilson",
+        "idCard": 999999999,
+        "email": "sophiawilson@example.com",
+        "phone": 101010101,
+        "plateNumber": 1111,
+        "isDeleted": false
+      }
+    ]
+  }`;
+  
+  // Parse the existing JSON data into a JavaScript object
+  const existingJsonObject = JSON.parse(existingJsonString);
+  
+  // Function to handle form submission
+  function handleFormSubmission(event) {
+    event.preventDefault(); // Prevent form submission
+  
+    // Get form values
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const cardNumber = document.getElementById('cardNumber').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const birthday = document.getElementById('birthday').value;
+    const plateNumber = document.getElementById('plateNumber').value;
+  
+    // Create subscriber object
+    const newSubscriber = {
+      firstName: firstName,
+      lastName: lastName,
+      idCard: cardNumber,
+      email: email,
+      phone: phone,
+      birthday: birthday,
+      plateNumber: plateNumber,
+      isDeleted: false
+    };
+  
+    // Add the new subscriber object to the 'subscriber' array
+    existingJsonObject.subscriber.push(newSubscriber);
+  
+    // Convert the JavaScript object back to a JSON string
+    const updatedJsonString = JSON.stringify(existingJsonObject);
+  
+    // Log the updated JSON string (you can send it to a server or perform any other action here)
+    console.log(updatedJsonString);
+  }
+  
+  // Get the form element
+  const form = document.getElementById('myForm');
+  
+  // Add event listener for form submission
+  form.addEventListener('submit', handleFormSubmission);
+  
+          </script>
       </section>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
