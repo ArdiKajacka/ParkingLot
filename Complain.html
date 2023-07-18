@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,4 +88,95 @@
       <!-- Bootstrap JS -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirana Parking</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="complain.css">
+  <link rel="stylesheet" href="carParking.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/331e2d8c05.js" crossorigin="anonymous"></script>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-nav" id="navBar">
+    
+    <a class="navbar-brand" href="http://127.0.0.1:5500/carParking.html">
+        <img src="logo.jpg" alt="Logo" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item order-first">
+          <a class="nav-link" href="http://127.0.0.1:5500/carParking.html#heroSection">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://127.0.0.1:5500/carParking.html#priceSection">Prices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://127.0.0.1:5500/complain.html">Complain</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://127.0.0.1:5500/subscribe.html">Subscribe</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</head>
+<body>
+
+
+      <section id="Complain">
+        <div class="card">
+            <h2>Complaint Form</h2>
+            <form id="complaints">
+              <div class="input-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+              </div>
+              <div class="input-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+              </div>
+              <div class="input-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+              </div>
+              <div class="input-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="input-group">
+                <label for="complaintType">Complaint Type:</label>
+                <select id="complaintType" name="complaintType" required>
+                  <option value="" selected disabled>Select complaint type</option>
+                  <option value="damage">Damage to Car</option>
+                  <option value="reservation">Spot Reservation Problems</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="complaintDetails">Complaint Details:</label>
+                <br>
+                <textarea id="complaintDetails" name="complaintDetails" rows="4" required></textarea>
+              </div>
+              
+              <div class="input-group">
+                <input id="submit-button" type="Submit" value="Sumbit">
+              </div>
+
+            </form>
+            <script src="complain.js"></script>
+          </div>
+
+      </section>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+>>>>>>> 39a9c76825486bd92e650e6837992fb399b01e64
 </html>
