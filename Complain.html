@@ -78,56 +78,7 @@
               </div>
 
             </form>
-            <script>
-              // JSON data
-              const complaintsJsonString = `{
-                "complaints": []
-              }`;
-          
-              // Parse the JSON data into a JavaScript object
-              const complaintsJsonObject = JSON.parse(complaintsJsonString);
-          
-              // Function to handle form submission
-              function handleFormSubmission(event) {
-                event.preventDefault(); // Prevent form submission
-          
-                // Get form values
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value;
-                const complaintType = document.getElementById('complaintType').value;
-                const complaintDetails = document.getElementById('complaintDetails').value;
-          
-                // Create complaint object
-                const newComplaint = {
-                  firstName: firstName,
-                  lastName: lastName,
-                  phone: phone,
-                  email: email,
-                  complaintType: complaintType,
-                  complaintDetails: complaintDetails
-                };
-          
-                // Add the new complaint object to the 'complaints' array
-                complaintsJsonObject.complaints.push(newComplaint);
-          
-                // Convert the JavaScript object back to a JSON string
-                const updatedJsonString = JSON.stringify(complaintsJsonObject);
-          
-                // Log the updated JSON string (you can send it to a server or perform any other action here)
-                console.log(updatedJsonString);
-          
-                // Reset the form
-                document.getElementById('complaints').reset();
-              }
-          
-              // Get the form element
-              const form = document.getElementById('complaints');
-          
-              // Add event listener for form submission
-              form.addEventListener('submit', handleFormSubmission);
-            </script>
+            <script src="complain.js"></script>
           </div>
 
       </section>
