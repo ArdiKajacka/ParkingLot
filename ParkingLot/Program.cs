@@ -13,6 +13,7 @@ namespace ParkingLot
 	{
 		public static void Main(string[] args)
 		{
+			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Get the configuration from the appsettings.json file
@@ -20,6 +21,18 @@ namespace ParkingLot
 				.SetBasePath(builder.Environment.ContentRootPath)
 				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 				.Build();
+
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,
+								  policy =>
+								  {
+									  policy.WithOrigins(
+														  "https://localhost:7145")
+											.AllowAnyHeader()
+											.AllowAnyMethod();
+								  });
+			});
 
 			builder.Services.AddControllers();
 
@@ -54,6 +67,7 @@ namespace ParkingLot
 
 			app.UseHttpsRedirection();
 			app.UseAuthorization();
+			app.UseCors(MyAllowSpecificOrigins);
 
 			app.MapControllers();
 

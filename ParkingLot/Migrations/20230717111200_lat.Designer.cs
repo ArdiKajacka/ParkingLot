@@ -12,8 +12,8 @@ using ParkingLot.DbContexts;
 namespace ParkingLot.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20230714084305_lately")]
-    partial class lately
+    [Migration("20230717111200_lat")]
+    partial class lat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

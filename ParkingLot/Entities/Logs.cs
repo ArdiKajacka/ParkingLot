@@ -12,10 +12,12 @@ namespace ParkingLot.Entities
 		public int SubscriptionId { get; set; }
 		public Subscriptions Subscription { get; set; }
 
-		public DateTime CheckIn { get; set; }
+		public DateTime CheckIn { get; set; } = DateTime.Now;
 		public DateTime CheckOut { get; set; }
+		
+		[Column(TypeName = "decimal(18, 2)")]
 		public decimal Price { get; set; } 
 
-		public bool IsDeleted { get; set; }
+		public bool IsDeleted { get; set; } = false;
 	}
 }
