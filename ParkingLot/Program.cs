@@ -28,7 +28,7 @@ namespace ParkingLot
 								  policy =>
 								  {
 									  policy.WithOrigins(
-														  "https://localhost:7145")
+														  "https://localhost:5500")
 											.AllowAnyHeader()
 											.AllowAnyMethod();
 								  });
