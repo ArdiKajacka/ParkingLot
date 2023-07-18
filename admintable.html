@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <link rel="stylesheet" href="tableStyling.css">
+    <img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="display: none;">
+    <script>
+      onload = function() {
+        createTable()
+      };
+    </script>
+  </head>
+  <body>
+      <div class="flex-big">
+        <div class="flex-mid">
+            <div class="flex-small">
+                <h4>Search by Keyword</h4>
+            </div>
+        </div>
+        <div class="flex-mid">
+
+          <div class="flex-small">
+            <button class="btn"  onclick="renderTable(carsArray)">Reset<img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="width: 15px;"></button>
+            <input type="text" id="searchCars">
+            <button class="btn"  onclick="filterCarsByKeyword(arrayInUse)">Search<img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="width: 15px;"></button>
+          </div>
+        </div>
+        <div id="table-container" class="flex-mid"></div>
+        <div></div>
+        <div class="flex-mid">
+          <div class="flex-small">
+            <h5>from:</h5>
+            <input type="text" id="startingPrice">
+          </div>
+          <div class="flex-small">
+            <h5>to:</h5>
+            <input type="text" id="maxPrice">
+            <button class="btn" onclick="priceRange(arrayInUse)">Search<img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="width: 15px;"></button>
+        </div>
+      </div>
+      <script src="createArray.js"></script>
+  </body>
+</html>
