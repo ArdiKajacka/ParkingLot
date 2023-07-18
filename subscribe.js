@@ -1,4 +1,4 @@
-function loadComplaintData() {
+function loadSubscriberData() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "subscriber.json", true);
 
