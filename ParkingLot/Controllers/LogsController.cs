@@ -77,5 +77,12 @@ namespace ParkingLot.Controllers
 				return BadRequest($"Failed to delete log: {ex.Message}");
 			}
 		}
+
+		[HttpPatch("{logsId}/checkout time")]
+		public IActionResult UpdateCheckoutTime(int logsId, [FromBody] DateTime newCheckOutTime)
+		{
+			_logsRepository.UpdateCheckoutTime(logsId, newCheckOutTime);
+			return Ok();
+		}
 	}
 }

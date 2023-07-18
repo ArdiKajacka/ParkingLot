@@ -2,12 +2,14 @@
 using ParkingLot.DataStore;
 using ParkingLot.DbContexts;
 using ParkingLot.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ParkingLot.Repositories
 {
 	public class LogsRepository
 	{
-
 		private readonly ParkingContext _context;
 
 		public LogsRepository(ParkingContext context)
@@ -28,7 +30,7 @@ namespace ParkingLot.Repositories
 			{
 				PricingPlans pricingPlan = PricingPlansData.Current.AllPricingPlans.FirstOrDefault(plan => plan.Type == GetPricingPlanType(logs.CheckIn));
 
-				// Kontrollon nese subscription Id eshte prezente
+				// Check if subscription Id is present
 				if (logs.SubscriptionId > 0)
 				{
 					logs.Price = 0;
@@ -37,7 +39,7 @@ namespace ParkingLot.Repositories
 				{
 					decimal totalHours = (decimal)duration.TotalHours;
 
-					//nese nuk e ka kaluar minimumin per te paguar sa per 1 dite 
+					// Check if it hasn't exceeded the minimum hours for the daily rate
 					if (totalHours <= pricingPlan.MinimumHours)
 					{
 						logs.Price = totalHours * pricingPlan.HourlyPricing;
@@ -47,14 +49,14 @@ namespace ParkingLot.Repositories
 						int totalDays = (int)Math.Floor(totalHours / 24);
 						decimal remainingHours = totalHours % 24;
 
-						//kontrollon nese remaining hours qe ngelen nuk e ka kaluar minimum hours dhe e shton ne cmim per ore
+						// Check if the remaining hours haven't exceeded the minimum hours and add to the hourly rate
 						if (remainingHours <= pricingPlan.MinimumHours)
 						{
 							logs.Price = (totalDays * pricingPlan.DailyPricing) + (remainingHours * pricingPlan.HourlyPricing);
 						}
 						else
 						{
-							//nese remaining hours e ka kaluar minimum hours e shton si dite
+							// If the remaining hours have exceeded the minimum hours, add a day to the daily rate
 							logs.Price = ((totalDays + 1) * pricingPlan.DailyPricing);
 						}
 					}
@@ -65,7 +67,6 @@ namespace ParkingLot.Repositories
 			_context.SaveChanges();
 		}
 
-
 		private PricingPlanType GetPricingPlanType(DateTime date)
 		{
 			return date.DayOfWeek switch
@@ -75,13 +76,11 @@ namespace ParkingLot.Repositories
 			};
 		}
 
-
-
 		public IEnumerable<Logs> GetLogsByDate(DateTime date)
 		{
 			return _context.Logs.Where(logs => logs.CheckIn.Date == date.Date);
 		}
-		// kerko nga emri ose mbiemri i subscriberit ose nga kodi
+
 		public IEnumerable<Logs> SearchLogs(string searchQuery)
 		{
 			return _context.Logs
@@ -109,18 +108,25 @@ namespace ParkingLot.Repositories
 				});
 		}
 
-
 		public void DeleteLogs(int logsId)
 		{
 			var logs = _context.Logs.Find(logsId);
 			if (logs != null)
 			{
 				logs.IsDeleted = true;
-				_context.Entry(logs).State = EntityState.Modified; // Mark the entity as modified
+				_context.Entry(logs).State = EntityState.Modified;
 				_context.SaveChanges();
 			}
 		}
 
-
+		public void UpdateCheckoutTime(int logsId, DateTime newCheckOutTime)
+		{
+			var logs = _context.Logs.Find(logsId);
+			if (logs != null)
+			{
+				logs.CheckOut = newCheckOutTime;
+				_context.SaveChanges();
+			}
+		}
 	}
 }
