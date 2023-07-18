@@ -28,7 +28,7 @@ function loadComplaintData() {
         const newSubscriber = {
           firstName: firstName,
           lastName: lastName,
-          idCard: cardNumber,
+          idCard: parseInt(cardNumber),
           email: email,
           phone: phone,
           birthday: birthday,
@@ -36,26 +36,28 @@ function loadComplaintData() {
           isDeleted: false
         };
 
-        // Add the new subscriber object to the 'subscriber' array
-        jsonResponse.subscriber.push(newSubscriber);
-
-        // Convert the JavaScript object back to a JSON string
-        const updatedJsonString = JSON.stringify(jsonResponse);
+        // Convert the JavaScript object to a JSON string
+        const newSubscriberJson = JSON.stringify(newSubscriber);
 
         // Create a new XMLHttpRequest object
         var postRequest = new XMLHttpRequest();
-        postRequest.open("POST", "API_ENDPOINT", true); 
+        postRequest.open("POST", "api/subscribers", true);
         postRequest.setRequestHeader("Content-Type", "application/json");
 
         postRequest.onreadystatechange = function () {
-          if (postRequest.readyState === 4 && postRequest.status === 200) {
-            // Request successful
-            console.log(postRequest.responseText);
+          if (postRequest.readyState === 4) {
+            if (postRequest.status === 200) {
+              // Request successful
+              console.log(postRequest.responseText);
+            } else {
+              // Request failed
+              console.error("Failed to create subscriber:", postRequest.responseText);
+            }
           }
         };
 
-        // Send the updated JSON string in the request body
-        postRequest.send(updatedJsonString);
+        // Send the new subscriber JSON string in the request body
+        postRequest.send(newSubscriberJson);
       });
     }
   };
