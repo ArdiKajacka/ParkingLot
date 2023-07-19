@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table</title>
-    <link rel="stylesheet" href="tableStyling.css">
-    <img src="https://www.htmlcssbuttongenerator.com/iconExample-search-thin.svg" style="display: none;">
-    <script>
-       window.onload = function() {
-    renderTable(subscriberArray);
-  };
-    </script>
-  </head>
-  <body>
-      <div class="flex-big">
-        <div class="flex-mid">
-            <div class="flex-small">
-                <h4>Search by Keyword</h4>
-            </div>
-        </div>
-        <div class="flex-mid">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table</title>
+  <link rel="stylesheet" href="tableStyling.css">
+  <script src="createArray.js"></script>
+</head>
+<body>
+  <div class="flex-big">
+    <div class="flex-mid">
+      <div class="flex-small">
+        <h4>Search by Keyword</h4>
+      </div>
+    </div>
+    <div class="flex-mid">
+      <div class="flex-small">
+        <input type="text" id="Search">
+      </div>
+    </div>
+    <div id="table-container" class="flex-mid"></div>
+  </div>
 
-          <div class="flex-small">
-            <input type="text" id="searchCars">
-          </div>
-        </div>
-        <div id="table-container" class="flex-mid"></div>
-        <div></div>
-        
-      <script src="createArray.js"></script>
-  </body>
+  <script src="createArray.js"></script>
+</body>
 </html>

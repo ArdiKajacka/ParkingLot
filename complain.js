@@ -44,7 +44,7 @@ function loadComplaintsData() {
   
     // Create a new XMLHttpRequest object
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "YOUR_API_ENDPOINT", true); // REPLACE WITH YOUR SERVER-SIDE API ENDPOINT
+    xhr.open("POST", "complaints.json", true); // REPLACE WITH YOUR SERVER-SIDE API ENDPOINT
     xhr.setRequestHeader("Content-Type", "application/json");
   
     xhr.onreadystatechange = function () {

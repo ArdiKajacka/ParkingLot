@@ -41,7 +41,7 @@ function loadSubscriberData() {
 
         // Create a new XMLHttpRequest object
         var postRequest = new XMLHttpRequest();
-        postRequest.open("POST", "api/subscribers", true);
+        postRequest.open("POST", "subscriber.json", true);
         postRequest.setRequestHeader("Content-Type", "application/json");
 
         postRequest.onreadystatechange = function () {

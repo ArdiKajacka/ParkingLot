@@ -4,17 +4,26 @@ var reservedSpots;
 var freeSpots;
 var busySpots;
 
-async function fetchOverallSpots() {
-  try {
-    const response = await fetch('spots.json');
-    const jsonData = await response.json();
-    const tempOverallSpots = jsonData.spots[0].value;
-    return tempOverallSpots;
-  } catch (error) {
-    console.error('Error fetching or parsing the JSON:', error);
-    throw error;
-  }
+function fetchOverallSpots() {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'spots.json', true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const jsonData = JSON.parse(xhr.responseText);
+          const tempOverallSpots = jsonData.spots[0].value;
+          resolve(tempOverallSpots);
+        } else {
+          console.error('Error fetching the JSON:', xhr.status);
+          reject(xhr.status);
+        }
+      }
+    };
+    xhr.send();
+  });
 }
+
 
 fetchOverallSpots()
   .then(tempOverallSpots => {
