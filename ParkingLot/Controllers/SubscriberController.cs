@@ -27,7 +27,19 @@ public class SubscriberController : ControllerBase
 			return BadRequest($"Failed to create subscriber: {ex.Message}");
 		}
 	}
-
+	[HttpGet]
+	public IActionResult GetAllSubscribers()
+	{
+		try
+		{
+			var subscribers = _subscriberRepository.GetAllSubscribers();
+			return Ok(subscribers);
+		}
+		catch (Exception ex)
+		{
+			return BadRequest($"Failed to retrieve subscribers: {ex.Message}");
+		}
+	}
 	// GET api/subscribers/{firstName}
 	[HttpGet("{idCard}")]
 	public IActionResult GetSubscriberById(int idCard)

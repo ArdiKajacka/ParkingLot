@@ -1,12 +1,11 @@
 // Function to load subscriber data from the JSON file
 function getSubscriberData() {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "subscriber.json", true);
-
+  //api/subscribers
+  xhr.open("GET", "api/subscribers", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var jsonResponse = JSON.parse(xhr.responseText);
-      // Process the JSON data here
       console.log(jsonResponse);
     }
   };

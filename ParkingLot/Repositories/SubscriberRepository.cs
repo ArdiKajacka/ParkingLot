@@ -33,6 +33,10 @@ namespace ParkingLot.Repositories
 			_context.Subscriber.Add(newSubscriber);
 			_context.SaveChanges();
 		}
+		public IEnumerable<Subscriber> GetAllSubscribers()
+		{
+			return _context.Subscriber.ToList();
+		}
 		//public IEnumerable<Subscriber> GetSubscriberByFirstName(string firstName)
 		//{
 			//return _context.Subscriber.Where(subscriber => subscriber.FirstName == firstName);
