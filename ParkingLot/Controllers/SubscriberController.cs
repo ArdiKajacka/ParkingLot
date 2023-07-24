@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using ParkingLot.Entities;
 using ParkingLot.Repositories;
 
 [ApiController]
+[EnableCors("_myAllowSpecificOrigins")] 
 [Route("api/subscribers")]
 public class SubscriberController : ControllerBase
 {

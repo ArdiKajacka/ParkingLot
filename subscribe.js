@@ -2,7 +2,7 @@
 function getSubscriberData() {
   var xhr = new XMLHttpRequest();
   //api/subscribers
-  xhr.open("GET", "api/subscribers", true);
+  xhr.open("GET", "https://localhost:7145/api/subscribers", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var jsonResponse = JSON.parse(xhr.responseText);
@@ -11,6 +11,9 @@ function getSubscriberData() {
   };
 
   xhr.send();
+}
+function test() {
+  debugger
 }
 
 // Function to handle the form submission
@@ -62,6 +65,7 @@ function submitSubscriberData() {
 
 // Load subscriber data when the page loads
 getSubscriberData();
+test();
 
 const submitButton = document.getElementById('submit-button');
 submitButton.addEventListener('click', function(event) {
